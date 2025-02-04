@@ -11,6 +11,8 @@ class HomeViewController: UIViewController {
     
     let colorBackgorund: UIColor = .gray.withAlphaComponent(0.3)
     
+    let winterView = WeatherView()
+    
     private lazy var backgroundImageView : UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "background")
@@ -22,11 +24,10 @@ class HomeViewController: UIViewController {
     private lazy var buttonLocation: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let image = UIImage(systemName: SymbolsMap.settings.rawValue)
+        let image = UIImage(systemName: SymbolsMap.locationFill.rawValue)
         button.setImage(image, for: .normal)
-        button.layer.cornerRadius = 12
-        button.tintColor = .gray
-        button.backgroundColor = colorBackgorund
+        button.contentMode = .scaleAspectFit
+        button.tintColor = .weatherColour
         return button
     }()
     
@@ -34,9 +35,11 @@ class HomeViewController: UIViewController {
         let input = UITextField()
         input.translatesAutoresizingMaskIntoConstraints = false
         input.placeholder = "Pesquisa"
-        input.font = .systemFont(ofSize: 14)
+        input.font = .systemFont(ofSize: 24)
         input.backgroundColor = colorBackgorund
         input.textColor = .weatherColour
+        input.tintColor = .weatherColour
+        input.textAlignment = .right
         input.borderStyle = .roundedRect
         return input
     }()
@@ -45,9 +48,9 @@ class HomeViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: SymbolsMap.search.rawValue), for: .normal)
-        button.layer.cornerRadius = 12
-        button.tintColor = .gray
-        button.backgroundColor = colorBackgorund
+        button.contentMode = .scaleToFill
+        
+        button.tintColor = .weatherColour
         return button
     }()
 
@@ -66,6 +69,8 @@ class HomeViewController: UIViewController {
         view.addSubview(buttonLocation)
         view.addSubview(searchInputLabel)
         view.addSubview(searchButton)
+        view.addSubview(winterView)
+        winterView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func setupConstraints(){
@@ -79,20 +84,25 @@ class HomeViewController: UIViewController {
             //MARK: setup button location app
             buttonLocation.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             buttonLocation.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            buttonLocation.widthAnchor.constraint(equalToConstant: 32),
-            buttonLocation.heightAnchor.constraint(equalToConstant: 32),
+            buttonLocation.widthAnchor.constraint(equalToConstant: 40),
+            buttonLocation.heightAnchor.constraint(equalToConstant: 40),
             
             //MARK: setup search input
             searchInputLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchInputLabel.leadingAnchor.constraint(equalTo: buttonLocation.trailingAnchor, constant: 8),
-            searchInputLabel.heightAnchor.constraint(equalToConstant: 32),
+            searchInputLabel.heightAnchor.constraint(equalToConstant: 40),
             
             //MARK: SETUP SEARCH BUTTON
             searchButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchButton.leadingAnchor.constraint(equalTo: searchInputLabel.trailingAnchor, constant: 8),
             searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            searchButton.widthAnchor.constraint(equalToConstant: 32),
-            searchButton.heightAnchor.constraint(equalToConstant: 32),
+            searchButton.widthAnchor.constraint(equalToConstant: 40),
+            searchButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            
+            //MARK: SETUP Winter View
+            winterView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            winterView.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 78),
 
         ])
     }

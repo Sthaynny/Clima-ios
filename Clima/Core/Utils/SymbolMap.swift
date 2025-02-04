@@ -13,5 +13,7 @@ enum SymbolsMap: String {
     case heart = "heart.fill"
     case profile = "person.circle"
     case settings = "gearshape"
+    case rain = "cloud.rain"
+    case locationFill = "location.circle.fill"
     // Adicione aqui outros símbolos conforme necessário
 }
