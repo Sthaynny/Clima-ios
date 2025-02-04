@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C215331B2D519F6900CA239D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C21533142D519F6900CA239D /* Assets.xcassets */; };
+		C215331D2D519F6900CA239D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C21533172D519F6900CA239D /* LaunchScreen.storyboard */; };
+		C215331E2D519F6900CA239D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21533132D519F6900CA239D /* AppDelegate.swift */; };
+		C215331F2D519F6900CA239D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21533182D519F6900CA239D /* SceneDelegate.swift */; };
+		C21533202D519F6900CA239D /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21533192D519F6900CA239D /* HomeController.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		C21532E02D514CA000CA239D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,27 +35,15 @@
 		C21532C92D514C9D00CA239D /* Clima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C21532DF2D514CA000CA239D /* ClimaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClimaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C21532E92D514CA000CA239D /* ClimaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClimaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C21533132D519F6900CA239D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C21533142D519F6900CA239D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C21533152D519F6900CA239D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C21533162D519F6900CA239D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C21533182D519F6900CA239D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		C21533192D519F6900CA239D /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		C21532F12D514CA000CA239D /* Exceptions for "Clima" folder in "Clima" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = C21532C82D514C9D00CA239D /* Clima */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		C21532CB2D514C9D00CA239D /* Clima */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				C21532F12D514CA000CA239D /* Exceptions for "Clima" folder in "Clima" target */,
-			);
-			path = Clima;
-			sourceTree = "<group>";
-		};
 		C21532E22D514CA000CA239D /* ClimaTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ClimaTests;
@@ -88,7 +84,7 @@
 		C21532C02D514C9D00CA239D = {
 			isa = PBXGroup;
 			children = (
-				C21532CB2D514C9D00CA239D /* Clima */,
+				C215331A2D519F6900CA239D /* Clima */,
 				C21532E22D514CA000CA239D /* ClimaTests */,
 				C21532EC2D514CA000CA239D /* ClimaUITests */,
 				C21532CA2D514C9D00CA239D /* Products */,
@@ -105,6 +101,43 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		C215331A2D519F6900CA239D /* Clima */ = {
+			isa = PBXGroup;
+			children = (
+				C21533232D519F9D00CA239D /* Home */,
+				C21533222D519F8800CA239D /* App */,
+				C21533212D519F6D00CA239D /* Config */,
+			);
+			path = Clima;
+			sourceTree = "<group>";
+		};
+		C21533212D519F6D00CA239D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				C21533142D519F6900CA239D /* Assets.xcassets */,
+				C21533152D519F6900CA239D /* Info.plist */,
+				C21533172D519F6900CA239D /* LaunchScreen.storyboard */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		C21533222D519F8800CA239D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C21533132D519F6900CA239D /* AppDelegate.swift */,
+				C21533182D519F6900CA239D /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C21533232D519F9D00CA239D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C21533192D519F6900CA239D /* HomeController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +152,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				C21532CB2D514C9D00CA239D /* Clima */,
 			);
 			name = Clima;
 			packageProductDependencies = (
@@ -225,6 +255,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C215331B2D519F6900CA239D /* Assets.xcassets in Resources */,
+				C215331D2D519F6900CA239D /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +281,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C215331E2D519F6900CA239D /* AppDelegate.swift in Sources */,
+				C215331F2D519F6900CA239D /* SceneDelegate.swift in Sources */,
+				C21533202D519F6900CA239D /* HomeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +315,17 @@
 			targetProxy = C21532EA2D514CA000CA239D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C21533172D519F6900CA239D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C21533162D519F6900CA239D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C21532F32D514CA000CA239D /* Debug */ = {
