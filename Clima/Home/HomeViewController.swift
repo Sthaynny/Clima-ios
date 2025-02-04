@@ -11,7 +11,8 @@ class HomeViewController: UIViewController {
     
     let colorBackgorund: UIColor = .gray.withAlphaComponent(0.3)
     
-    let winterView = WeatherView()
+    var weatherManager = WeatherManager()
+    let weatherView = WeatherView()
     
     private lazy var backgroundImageView : UIImageView = {
         let image = UIImageView()
@@ -24,9 +25,11 @@ class HomeViewController: UIViewController {
     private lazy var buttonLocation: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let image = UIImage(systemName: SymbolsMap.locationFill.rawValue)
-        button.setImage(image, for: .normal)
-        button.contentMode = .scaleAspectFit
+        
+        if  let image = UIImage(systemName: SymbolsMap.locationFill.rawValue){
+            button.setBackgroundImage(image, for: .normal)
+        }
+        button.contentMode = .scaleAspectFill
         button.tintColor = .weatherColour
         return button
     }()
@@ -47,9 +50,10 @@ class HomeViewController: UIViewController {
     private lazy var searchButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: SymbolsMap.search.rawValue), for: .normal)
-        button.contentMode = .scaleToFill
-        
+        if  let image = UIImage(systemName: SymbolsMap.search.rawValue){
+            button.setBackgroundImage(image, for: .normal)
+        }
+        button.contentMode = .scaleAspectFill
         button.tintColor = .weatherColour
         return button
     }()
@@ -58,6 +62,11 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         addSubViews()
         setupConstraints()
+        weatherManager.delegate = self
+        searchInputLabel.delegate = self
+        
+        weatherManager.fetchWeather(cityName: "London")
+        
         // Do any additional setup after loading the view.
     }
     
@@ -69,8 +78,9 @@ class HomeViewController: UIViewController {
         view.addSubview(buttonLocation)
         view.addSubview(searchInputLabel)
         view.addSubview(searchButton)
-        view.addSubview(winterView)
-        winterView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(weatherView)
+        weatherView.translatesAutoresizingMaskIntoConstraints = false
+         
     }
     
     func setupConstraints(){
@@ -101,8 +111,8 @@ class HomeViewController: UIViewController {
             
             
             //MARK: SETUP Winter View
-            winterView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            winterView.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 78),
+            weatherView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            weatherView.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 78),
 
         ])
     }
@@ -110,3 +120,34 @@ class HomeViewController: UIViewController {
 
 }
 
+
+
+extension HomeViewController: UITextFieldDelegate{
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("Test edition")
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("Test init")
+    }
+}
+
+
+
+extension HomeViewController: WeatherManagerDelegate{
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+        DispatchQueue.main.async {
+            self.weatherView.weatherModel = weather
+        }
+    }
+    
+    func didFailWithError(error: any Error) {
+        DispatchQueue.main.async {
+            sleep(1)
+            self.weatherView.weatherModel = WeatherModel(conditionId: 300, cityName: "Cajazeiras", temperature: 22)
+            self.weatherView.updateView()
+        }
+    }
+    
+    
+}

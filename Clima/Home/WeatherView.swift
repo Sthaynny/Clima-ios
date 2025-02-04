@@ -11,10 +11,10 @@ import UIKit
 
 class WeatherView: UIView {
     
-    var winterModel: WeatherModel?
+    var weatherModel: WeatherModel?
     
     private lazy var imageWinter: UIImageView = {
-        let image = UIImage(systemName: SymbolsMap.rain.rawValue)
+        let image = UIImage(systemName: weatherModel?.conditionName ?? SymbolsMap.rain.rawValue)
         let imageView  = UIImageView(image: image)
         imageView.tintColor = .weatherColour
         imageView.contentMode = .scaleAspectFill
@@ -25,7 +25,7 @@ class WeatherView: UIView {
     private lazy var temperatureLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "-°C"
+        label.text = "\(weatherModel?.temperatureString ?? "-" )°C"
         label.font = .systemFont(ofSize: 52, weight: .semibold)
         label.textColor = .weatherColour
         return label
@@ -35,7 +35,7 @@ class WeatherView: UIView {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "-"
+        label.text = weatherModel?.cityName ?? "-"
         label.font = .systemFont(ofSize: 24)
         label.textColor = .weatherColour
         return label
@@ -73,12 +73,11 @@ class WeatherView: UIView {
         ])
     }
     
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    func updateView(){
+        self.temperatureLabel.text = weatherModel?.temperatureString ?? "-"
+        self.imageWinter.image = UIImage(systemName: weatherModel?.conditionName ?? SymbolsMap.rain.rawValue)
+        self.cityLabel.text = weatherModel?.cityName ?? "-"
     }
-    */
 
 }
