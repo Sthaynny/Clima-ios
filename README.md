@@ -2,7 +2,7 @@
    <img src="https://github.com/user-attachments/assets/eb1a85c5-b298-4323-b55d-d37b915a6517" alt="app" width="200"/>
 </p>
 
-<h1 align="center">Nome do projeto</h1>
+<h1 align="center">Clima</h1>
 
 <p align="center">
    <a href="https://www.linkedin.com/in/igor-sthaynny/">
@@ -39,9 +39,7 @@
 
 # :camera: Screenshots
 <div align="center">
-   <img src="https://user-images.githubusercontent.com/46109133/155231022-7d54b0eb-a0c5-4e60-a244-3e5c30fc9373.jpeg" width="230"/>
-   <img src="https://user-images.githubusercontent.com/46109133/155231022-7d54b0eb-a0c5-4e60-a244-3e5c30fc9373.jpeg" width="230"/>
-   <img src="https://user-images.githubusercontent.com/46109133/155231022-7d54b0eb-a0c5-4e60-a244-3e5c30fc9373.jpeg" width="230"/>
+<img width="353" alt="Captura de Tela 2025-02-05 às 13 38 31" src="https://github.com/user-attachments/assets/28570e45-b5c1-4a08-8bb0-7f790f17f964" />
 
 </div>
   
