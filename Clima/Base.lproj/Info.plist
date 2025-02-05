@@ -3,7 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Este aplicativo necessita acessar sua localização enquanto em uso para oferecer conteúdo personalizado.</string>
+	<string>Precisamos acessar sua localização enquanto o aplicativo está em uso para fornecer melhores serviços.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Precisamos acessar sua localização sempre, mesmo quando o aplicativo está em segundo plano, para fornecer notificações baseadas em localização.</string>
+
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -17,6 +20,9 @@
 					<string>Default Configuration</string>
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+					
+
+				
 				</dict>
 			</array>
 		</dict>

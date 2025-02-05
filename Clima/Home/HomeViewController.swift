@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class HomeViewController: UIViewController {
     
@@ -13,6 +14,8 @@ class HomeViewController: UIViewController {
     
     var weatherManager = WeatherManager()
     let weatherView = WeatherView()
+    
+    let locationManager = CLLocationManager()
     
     private lazy var backgroundImageView : UIImageView = {
         let image = UIImageView()
@@ -31,6 +34,7 @@ class HomeViewController: UIViewController {
         }
         button.contentMode = .scaleAspectFill
         button.tintColor = .weatherColour
+        button.addTarget(self, action: #selector(locationActionButton), for: .touchUpInside)
         return button
     }()
     
@@ -44,6 +48,8 @@ class HomeViewController: UIViewController {
         input.tintColor = .weatherColour
         input.textAlignment = .right
         input.borderStyle = .roundedRect
+        input.addTarget(self, action: #selector(searchPressed), for: .touchUpInside)
+       
         return input
     }()
     
@@ -55,17 +61,23 @@ class HomeViewController: UIViewController {
         }
         button.contentMode = .scaleAspectFill
         button.tintColor = .weatherColour
+        button.addTarget(self, action: #selector(searchTapButton), for: .touchUpInside)
         return button
     }()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
         addSubViews()
         setupConstraints()
         weatherManager.delegate = self
         searchInputLabel.delegate = self
         
-        weatherManager.fetchWeather(cityName: "London")
+//        weatherManager.fetchWeather(cityName: "London")
         
         // Do any additional setup after loading the view.
     }
@@ -83,6 +95,7 @@ class HomeViewController: UIViewController {
          
     }
     
+  
     func setupConstraints(){
         NSLayoutConstraint.activate([
             //MARK: setup background color app
@@ -116,19 +129,50 @@ class HomeViewController: UIViewController {
 
         ])
     }
+    
+    @objc func searchTapButton(){
+        if let city = searchInputLabel.text {
+            weatherManager.fetchWeather(cityName: city)
+        }
+        
+        searchInputLabel.text = ""
+    }
 
 
 }
 
 
 
-extension HomeViewController: UITextFieldDelegate{
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        print("Test edition")
+//MARK: - UITextFieldDelegate
+
+extension HomeViewController: UITextFieldDelegate {
+    
+    @objc func searchPressed() {
+        searchInputLabel.endEditing(true)
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("Test init")
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchInputLabel.endEditing(true)
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text != "" {
+            return true
+        } else {
+            textField.placeholder = "Pesquisar"
+            return false
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if let city = searchInputLabel.text {
+            weatherManager.fetchWeather(cityName: city)
+        }
+        
+        searchInputLabel.text = ""
+        
     }
 }
 
@@ -142,6 +186,9 @@ extension HomeViewController: WeatherManagerDelegate{
     }
     
     func didFailWithError(error: any Error) {
+//        let alert = UIAlertController(title: "Erro ao obter Clima", message: "Não Foi possivel obter o clima na localização solicitada.", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+//        present(alert, animated: true)
         DispatchQueue.main.async {
             sleep(1)
             self.weatherView.weatherModel = WeatherModel(conditionId: 300, cityName: "Cajazeiras", temperature: 22)
@@ -150,4 +197,31 @@ extension HomeViewController: WeatherManagerDelegate{
     }
     
     
+}
+
+
+
+//MARK: - CLLocationManagerDelegate
+
+extension HomeViewController: CLLocationManagerDelegate {
+    
+    @objc func locationActionButton() {
+        locationManager.requestLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            locationManager.stopUpdatingLocation()
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            print("lat: \(lat), log: \(lon)")
+            weatherManager.fetchWeather(latitude: lat, longitude: lon)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        let alert = UIAlertController(title: "Erro ao obter permissão", message: "Não Foi possivel obtter a permissão de localização", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alert, animated: true)
+    }
 }
