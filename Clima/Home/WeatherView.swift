@@ -25,7 +25,7 @@ class WeatherView: UIView {
     private lazy var temperatureLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "\(weatherModel?.temperatureString ?? "-" )°C"
+        label.text = formatTemp(temp: weatherModel?.temperatureString ?? "-")
         label.font = .systemFont(ofSize: 52, weight: .semibold)
         label.textColor = .weatherColour
         return label
@@ -58,6 +58,10 @@ class WeatherView: UIView {
         addSubview(cityLabel)
     }
     
+    func formatTemp(temp: String) -> String {
+        return "\(temp) °C"
+    }
+    
     func setupConstraints(){
         NSLayoutConstraint.activate([
             imageWinter.topAnchor.constraint(equalTo: topAnchor),
@@ -75,7 +79,7 @@ class WeatherView: UIView {
     
     
     func updateView(){
-        self.temperatureLabel.text = weatherModel?.temperatureString ?? "-"
+        self.temperatureLabel.text = formatTemp(temp: weatherModel?.temperatureString ?? "-")
         self.imageWinter.image = UIImage(systemName: weatherModel?.conditionName ?? SymbolsMap.rain.rawValue)
         self.cityLabel.text = weatherModel?.cityName ?? "-"
     }

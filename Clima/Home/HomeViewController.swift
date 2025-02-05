@@ -76,10 +76,6 @@ class HomeViewController: UIViewController {
         setupConstraints()
         weatherManager.delegate = self
         searchInputLabel.delegate = self
-        
-//        weatherManager.fetchWeather(cityName: "London")
-        
-        // Do any additional setup after loading the view.
     }
     
     
@@ -177,7 +173,7 @@ extension HomeViewController: UITextFieldDelegate {
 }
 
 
-
+//MARK: WeatherManagerDelegate
 extension HomeViewController: WeatherManagerDelegate{
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         DispatchQueue.main.async {
